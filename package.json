@@ -1,0 +1,8 @@
+{
+  "name": "stone-node",
+  "version": "1.0.0",
+  "description": "Stone language compiler with Node.js",
+  "main": "index.js",
+  "author": "ahonn",
+  "license": "ISC",
+}

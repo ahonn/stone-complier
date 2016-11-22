@@ -1,0 +1,5 @@
+#!/usr/bin/env node
+
+const LexerRunner = require('../src/LexerRunner.js')
+
+LexerRunner.run(process.argv[2])
