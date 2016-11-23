@@ -1,9 +1,10 @@
 const fs = require('fs')
 
-const Token = require('./Token//Token.js')
-const IdToken = require('./Token/IdToken.js')
-const NumToken = require('./Token/NumToken.js')
-const StrToken = require('./Token/StrToken.js')
+const Token = require('../Token//Token.js')
+const IdToken = require('../Token/IdToken.js')
+const NumToken = require('../Token/NumToken.js')
+const StrToken = require('../Token/StrToken.js')
+const ParseException = require('../Exception/ParseException.js')
 
 class Lexer {
   constructor(input) {
@@ -83,7 +84,9 @@ class Lexer {
           token = new StrToken(lineNo, text)
         } else if (this.isIdentifier(text)) {
           token = new IdToken(lineNo, text)
-        } 
+        } else {
+          throw new ParseException('bad token at line ' + lineNo)
+        }
         
         this.queue.push(token)
       }

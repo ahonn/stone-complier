@@ -1,4 +1,4 @@
-const Token = require('./Token/Token.js')
+const Token = require('../Token/Token.js')
 const Lexer = require('./Lexer.js')
 
 class LexerRunner {

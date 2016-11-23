@@ -1,4 +1,5 @@
 while i<10 {
+  str = "string"
   sum = sum + i
   i = i + 1
 }
