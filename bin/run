@@ -1,5 +1,4 @@
 #!/usr/bin/env node
+const LexerRunner = require('../built/Lexer/LexerRunner.js').default
 
-const LexerRunner = require('../src/Lexer/LexerRunner.js')
-
-LexerRunner.run(process.argv[2])
+LexerRunner.run(require('fs').readFileSync(process.argv[2]).toString())

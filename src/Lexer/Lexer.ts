@@ -1,37 +1,38 @@
-const fs = require('fs')
-
-const Token = require('../Token//Token.js')
-const IdToken = require('../Token/IdToken.js')
-const NumToken = require('../Token/NumToken.js')
-const StrToken = require('../Token/StrToken.js')
-const ParseException = require('../Exception/ParseException.js')
+import Token from '../Token/Token'
+import NumToken from '../Token/NumToken'
+import StrToken from '../Token/StrToken';
+import IdToken from '../Token/IdToken';
+import ParseException from '../Exception/ParseException';
 
 class Lexer {
+  static regexPat: RegExp = /\s*((\/\/.*)|(\d+)|(\"(\\\\\"|\\\\\\\\|\\\\n|[^\"])*\")|([A-Z_a-z]\w*|==|<=|>=|&&|\|\||[^\w\d\s\n\t]{1}))/g
+
+  private queue: Array<Token> = []
+  private hasMore: boolean
+  private reader: string
+
   constructor(input) {
-    this.queue = []
     this.hasMore = true
-    this.reader = fs.readFileSync(input, 'utf-8')
-    this.regexPat 
-      = /\s*((\/\/.*)|(\d+)|(\"(\\\\\"|\\\\\\\\|\\\\n|[^\"])*\")|[A-Z_a-z]\w*|==|<=|>=|&&|\|\||[^\w\s\n\t]?)/g
+    this.reader = input    
   }
 
-  isComments(text) {
-    let re = /^\/\/.*/g
+  isComments(text: string) {
+    let re = /^\/\/.*/
     return re.test(text)
   }
 
-  isNumber(text) {
-    let re = /^\d+/g
+  isNumber(text: string) {
+    let re = /^\d+/
     return re.test(text)
   }
 
-  isString(text) {
-    let re = /^\"(\\\\\"|\\\\\\\\|\\\\n|[^\"])*\"/g
+  isString(text: string) {
+    let re = /^(\"(\\\\\"|\\\\\\\\|\\\\n|[^\"])*\")/
     return re.test(text)
   }
 
-  isIdentifier(text) {
-    let re = /^[A-Z_a-z]\w*|==|<=|>=|&&|\|\||[^\w\s\n\t]?/g
+  isIdentifier(text: string) {
+    let re = /^([A-Z_a-z]\w*|==|<=|>=|&&|\|\||[^\w\d\s\n\t]{1})/
     return re.test(text)
   }
 
@@ -42,14 +43,14 @@ class Lexer {
     return Token.EOF
   }
 
-  peek(i) {
+  peek(i: number) {
     if (this.fillQueue(i)) {
       return this.queue[i]
     }
     return Token.EOF
   }
 
-  fillQueue(i) {
+  fillQueue(i: number) {
     if (i >= this.queue.length) {
       if (this.hasMore) {
         this.readLine()
@@ -62,9 +63,10 @@ class Lexer {
 
   readLine() {
     let lines = this.reader.split('\n')
+     
     lines.map((line, lineNo) => {
-      let matcher = line.match(this.regexPat)
-
+      let matcher = line.match(Lexer.regexPat)
+     
       lineNo += 1
       this.addToken(lineNo, matcher)
       this.queue.push(new IdToken(lineNo, Token.EOL))
@@ -73,11 +75,11 @@ class Lexer {
     this.hasMore = false
   }
 
-  addToken(lineNo, matcher) {
-    while (matcher.length) {
-      let text = matcher.shift().trim()
+  addToken(lineNo: number, matcher: string[]) {
+    while (matcher && matcher.length) {
+      let text: string = matcher.shift().trim()
       if (text && !this.isComments(text)) {
-        let token
+        let token: Token
         if (this.isNumber(text)) {
           token = new NumToken(lineNo, parseInt(text))
         } else if (this.isString(text)) {
@@ -94,4 +96,4 @@ class Lexer {
   } 
 }
 
-module.exports = Lexer
+export default Lexer

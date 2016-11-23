@@ -1,3 +1,3 @@
-# stone-node
+# stone
 
-A simple programming language written for book "A new scripting language in two weeks" by Node.js 
+A simple programming language with TypeScript.

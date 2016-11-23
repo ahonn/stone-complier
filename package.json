@@ -1,8 +1,19 @@
 {
-  "name": "stone-node",
+  "name": "stone",
   "version": "1.0.0",
-  "description": "Stone language compiler with Node.js",
+  "description": "A simple programming language with TypeScript.",
   "main": "index.js",
+  "scripts": {
+    "watch": "tsc --watch",
+    "test": "tsc -p . && mocha",
+    "lexer": "tsc -p . && bin/run",
+    "prepublish": "tsc -p ."
+  },
   "author": "ahonn",
   "license": "ISC",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.1.2",
+    "typescript": "^2.0.10"
+  }
 }

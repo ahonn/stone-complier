@@ -1,4 +1,6 @@
 class StoneException extends Error {
+  public message: string
+  public name: string
   constructor(message) {
     super()
     this.message = message || "Unknow Error"
@@ -6,4 +8,4 @@ class StoneException extends Error {
   }
 }
 
-module.exports = StoneException
+export default StoneException
