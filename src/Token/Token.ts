@@ -9,27 +9,27 @@ class Token {
     this.lineNumber = line
   }
 
-  getLineNumber() {
+  getLineNumber(): number {
     return this.lineNumber
   }
 
-  isNumber() {
+  isNumber(): boolean {
     return false 
   }
 
-  isIdentifier() { 
+  isIdentifier(): boolean { 
     return false 
   }
 
-  isString() {
+  isString(): boolean  {
     return false 
   }
   
-  getNumber() { 
+  getNumber(): void { 
     throw new StoneException("not number token")
   }
 
-  getText() {
+  getText(): string {
     return ""
   }
 }

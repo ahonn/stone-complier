@@ -8,11 +8,11 @@ class StrToken extends Token {
     this.str = str
   }
 
-  isString() {
+  isString(): boolean {
     return true
   }
 
-  getText() {
+  getText(): string {
     return this.str
   }
 }

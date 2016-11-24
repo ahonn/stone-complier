@@ -8,15 +8,15 @@ class NumToken extends Token {
     this.value = value
   }
 
-  isNumber() {
+  isNumber(): boolean {
     return true
   }
 
-  getText() {
+  getText(): string {
     return this.value.toString()
   }
 
-  getNumber() {
+  getNumber(): number {
     return this.value
   }
 }

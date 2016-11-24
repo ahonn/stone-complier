@@ -7,7 +7,7 @@ import ParseException from '../Exception/ParseException';
 class Lexer {
   static regexPat: RegExp = /\s*((\/\/.*)|(\d+)|(\"(\\\\\"|\\\\\\\\|\\\\n|[^\"])*\")|([A-Z_a-z]\w*|==|<=|>=|&&|\|\||[^\w\d\s\n\t]{1}))/g
 
-  private queue: Array<Token> = []
+  private queue: Array<Token> = new Array()
   private hasMore: boolean
   private reader: string
 
@@ -16,41 +16,41 @@ class Lexer {
     this.reader = input    
   }
 
-  isComments(text: string) {
+  isComments(text: string): boolean {
     let re = /^\/\/.*/
     return re.test(text)
   }
 
-  isNumber(text: string) {
+  isNumber(text: string): boolean {
     let re = /^\d+/
     return re.test(text)
   }
 
-  isString(text: string) {
+  isString(text: string): boolean {
     let re = /^(\"(\\\\\"|\\\\\\\\|\\\\n|[^\"])*\")/
     return re.test(text)
   }
 
-  isIdentifier(text: string) {
+  isIdentifier(text: string): boolean {
     let re = /^([A-Z_a-z]\w*|==|<=|>=|&&|\|\||[^\w\d\s\n\t]{1})/
     return re.test(text)
   }
 
-  read() {
+  read(): Token {
     if (this.fillQueue(0)) {
       return this.queue.shift()
     }
     return Token.EOF
   }
 
-  peek(i: number) {
+  peek(i: number): Token {
     if (this.fillQueue(i)) {
       return this.queue[i]
     }
     return Token.EOF
   }
 
-  fillQueue(i: number) {
+  fillQueue(i: number): boolean {
     if (i >= this.queue.length) {
       if (this.hasMore) {
         this.readLine()
@@ -61,7 +61,7 @@ class Lexer {
     return true
   }
 
-  readLine() {
+  readLine(): void {
     let lines = this.reader.split('\n')
      
     lines.map((line, lineNo) => {
@@ -75,7 +75,7 @@ class Lexer {
     this.hasMore = false
   }
 
-  addToken(lineNo: number, matcher: string[]) {
+  addToken(lineNo: number, matcher: string[]): void {
     while (matcher && matcher.length) {
       let text: string = matcher.shift().trim()
       if (text && !this.isComments(text)) {

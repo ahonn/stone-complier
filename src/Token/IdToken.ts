@@ -8,11 +8,11 @@ class IdToken extends Token {
     this.text = text
   }
 
-  isIdentifier() { 
+  isIdentifier(): boolean { 
     return true 
   }
 
-  getText() {
+  getText(): string {
     return this.text
   }
 }
