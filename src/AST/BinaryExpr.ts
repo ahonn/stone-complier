@@ -19,3 +19,5 @@ class BinaryExpr extends ASTList {
     return this.child(2)
   }
 }
+
+export default BinaryExpr

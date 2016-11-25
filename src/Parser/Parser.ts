@@ -1,20 +1,18 @@
 // import { Set } from 'typescript-collections'
 import Token from '../Token/Token'
 import Lexer from '../Lexer/Lexer'
-import ASTree from '../AST/ASTree'
-import ASTList from '../AST/ASTList'
-import ASTLeaf from '../AST/ASTLeaf'
+import { ASTree, ASTList, ASTLeaf } from '../AST'
 
 export default class Parser {
   protected elements: Array<Element>
   protected factory: Factory
 
   constructor(p: Parser) {
-    if (p === null) {
-      this.reset()
-    } else {
+    if (p instanceof Parser) {
       this.elements = p.elements
       this.factory = p.factory
+    } else {
+      this.reset(null)
     }
   }
 
@@ -39,9 +37,9 @@ export default class Parser {
     return new Parser(clazz)
   }
 
-  reset(clazz: any = null): Parser {
+  reset(clazz: any = undefined): Parser {
     this.elements = new Array()
-    if (clazz !== null) {
+    if (clazz !== undefined) {
       this.factory = Factory.getForASTList(clazz)
     }
     return this
@@ -348,7 +346,7 @@ export class Expr extends Element {
   parse(lexer: Lexer, res: Array<ASTree>): void {
     let right: ASTree = this.factor.parse(lexer)
     let prec: Precedence
-    while((prec = this.nextOperator(lexer)) !== null) {
+    while((prec = this.nextOperator(lexer)) != null) {
       right = this.doShift(lexer, right, prec.value)
     } 
     res.push(right)
@@ -421,11 +419,17 @@ export class Factory {
       return null
     }
     try {
-      let m = clazz.construtor
       let factor = new Factory()
-      factor.make0 = function(arg: Object): ASTree {
-        return new m(arg)
+      if (clazz.create) {
+        factor.make0 = function(arg: Object): ASTree {
+          return new clazz.create(arg)
+        }
+      } else {
+        factor.make0 = function(arg: Object): ASTree {
+          return new clazz(arg)
+        } 
       }
+
       return factor
     } catch (e) {
       throw new Error(e)

@@ -1,0 +1,4 @@
+#!/usr/bin/env node
+const ParserRunner = require('../built/Parser/ParserRunner.js').default
+
+ParserRunner.run(require('fs').readFileSync(process.argv[2]).toString())
