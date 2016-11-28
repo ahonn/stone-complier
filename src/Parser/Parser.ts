@@ -7,12 +7,12 @@ export default class Parser {
   protected elements: Array<Element>
   protected factory: Factory
 
-  constructor(p: Parser) {
+  constructor(p: Parser | any) {
     if (p instanceof Parser) {
       this.elements = p.elements
       this.factory = p.factory
     } else {
-      this.reset(null)
+      this.reset(p)
     }
   }
 
@@ -418,18 +418,19 @@ export class Factory {
     if (clazz === null) {
       return null
     }
+  
     try {
       let factor = new Factory()
-      if (clazz.create) {
+
+      if (clazz.create != undefined) {
         factor.make0 = function(arg: Object): ASTree {
-          return new clazz.create(arg)
+          return clazz.create(arg)
         }
       } else {
         factor.make0 = function(arg: Object): ASTree {
           return new clazz(arg)
         } 
       }
-
       return factor
     } catch (e) {
       throw new Error(e)

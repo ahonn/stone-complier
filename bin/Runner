@@ -1,0 +1,4 @@
+#!/usr/bin/env node
+const Runner = require('../built/Runner.js').default
+
+Runner.run(require('fs').readFileSync(process.argv[2]).toString())

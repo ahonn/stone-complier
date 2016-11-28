@@ -1,5 +1,6 @@
+import ASTLeaf from './ASTLeaf'
 import Token from '../Token/Token'
-import ASTLeaf from './ASTLeaf';
+import Environment from '../Env/Environment'
 
 class Numberliteral extends ASTLeaf {
   constructor(t: Token) {
@@ -8,6 +9,10 @@ class Numberliteral extends ASTLeaf {
 
   value(): number | void {
     return this.getToken().getNumber()
+  }
+
+  eval(env: Environment): any {
+    return this.value()
   }
 }
 

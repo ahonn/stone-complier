@@ -1,5 +1,6 @@
-import ASTree from './ASTree';
-import Token from '../Token/Token';
+import ASTree from './ASTree'
+import Token from '../Token/Token'
+import Environment from '../Env/Environment'
 
 class ASTLeaf extends ASTree {
   private static empty: Array<ASTree> = new Array()
@@ -32,6 +33,10 @@ class ASTLeaf extends ASTree {
 
   location(): string {
     return "at line " + this.token.getLineNumber()
+  }
+
+  eval(env: Environment): Object {
+    throw new Error("cannot eval: " + this.toString())
   }
 }
 

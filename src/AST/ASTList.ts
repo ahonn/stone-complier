@@ -1,5 +1,6 @@
-import ASTree from './ASTree';
-import Token from '../Token/Token';
+import ASTree from './ASTree'
+import Token from '../Token/Token'
+import Environment from '../Env/Environment'
 
 class ASTList extends ASTree {
   protected childrens: Array<ASTree>
@@ -33,6 +34,10 @@ class ASTList extends ASTree {
       }
     }
     return ""
+  }
+
+  eval(env: Environment): Object {
+    throw new Error("cannot eval: " + this.toString())
   }
 }
 
