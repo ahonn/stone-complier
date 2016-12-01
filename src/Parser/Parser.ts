@@ -206,8 +206,8 @@ abstract class AToken extends Element {
 
   constructor(type: any) {
     super()
-    if (type === undefined) {
-      type = ASTList.name
+    if (type === null) {
+      type = ASTLeaf.name
     }
     this.factory = Factory.get(type)
   }
