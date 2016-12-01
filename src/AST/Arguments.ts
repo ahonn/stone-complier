@@ -19,7 +19,7 @@ class Arguments extends Postfix {
     }
     
     let func: Functions = <Functions>value
-    let params: ParameterList = new ParameterList(func.getParameters().children())
+    let params: ParameterList = func.getParameters()
 
     if (this.size() != params.size()) {
       throw new Error("bad number of arguments")

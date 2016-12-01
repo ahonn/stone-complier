@@ -17,7 +17,6 @@ class ParameterList extends ASTList {
   }
 
   eval(env: Environment, value: Object, index: number): any {
-    console.log(this.children)
     env.putNew(this.name(index), value)
   }
 }
