@@ -12,8 +12,8 @@ const rule = Parser.rule
 
 class FuncParser extends BasicParser {
   param: Parser = rule().identifier(this.reserved, NameLiteral)
-  params: Parser = rule(PrimaryExpr).ast(this.param).repeat(rule().sep(",").ast(this.param))
-  paramList: Parser = rule(ParameterList).sep("(").maybe(this.params).sep(")")
+  params: Parser = rule(ParameterList).ast(this.param).repeat(rule().sep(",").ast(this.param))
+  paramList: Parser = rule().sep("(").maybe(this.params).sep(")")
   def: Parser = rule(DefStmnt).sep("def")
                   .identifier(this.reserved, NameLiteral)
                   .ast(this.paramList)
