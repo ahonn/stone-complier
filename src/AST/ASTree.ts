@@ -5,10 +5,7 @@ abstract class ASTree {
   abstract numChildren(): number
   abstract children(): Array<ASTree>
   abstract location(): string
-  abstract eval(env: Environment): Object
-  iterator(): Array<ASTree> {
-    return this.children()
-  }
+  abstract eval(env: Environment, value?: Object, index?: number)
 }
 
 export default ASTree

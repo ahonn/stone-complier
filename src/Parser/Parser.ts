@@ -50,7 +50,7 @@ export default class Parser {
     return this
   }
 
-  identifier(reserved: Set<string>, clazz: any): Parser {
+  identifier(reserved: Set<string>, clazz: any = null): Parser {
     this.elements.push(new IdToken(clazz, reserved))
     return this
   }

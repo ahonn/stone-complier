@@ -1,6 +1,6 @@
 import ASTree from './ASTree'
 import ASTList from './ASTList'
-import NullStmnt from './NullStmnt';
+import NullStmnt from './NullStmnt'
 import Environment from '../Env/Environment'
 
 class BlockStmnt extends ASTList {

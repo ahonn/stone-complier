@@ -36,7 +36,7 @@ class ASTList extends ASTree {
     return ""
   }
 
-  eval(env: Environment): Object {
+  eval(env: Environment, value: Object, index?: number): Object {
     throw new Error("cannot eval: " + this.toString())
   }
 }

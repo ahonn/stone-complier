@@ -5,7 +5,7 @@
         "removeComments": true,
         "preserveConstEnums": true,
         "outDir": "./built",
-        "sourceMap": true,
+        "sourceMap": false,
         "experimentalDecorators": true
     },
     "include": [
