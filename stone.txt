@@ -1,8 +1,10 @@
-def fib(n) {
-  if n < 2 {
-    n
-  } else {
-    fib(n - 1) + fib(n - 2)
+def counter (c) {
+  fun () {
+    c = c + 1
   }
 }
-fib(10)
+c1 = counter(0)
+c2 = counter(0)
+c1()
+c1()
+c2()

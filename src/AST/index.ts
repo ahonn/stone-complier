@@ -14,6 +14,7 @@ import WhileStmnt from './WhileStmnt'
 import DefStmnt from './DefStmnt'
 import Arguments from './Arguments'
 import ParameterList from './ParameterList'
+import Closure from './Closure'
 
 import NameLiteral from './NameLiteral'
 import NumberLiteral from './NumberLiteral'
@@ -36,5 +37,6 @@ export {
   NumberLiteral,
   StringLiteral,
   Postfix,
-  ParameterList
+  ParameterList,
+  Closure
 }

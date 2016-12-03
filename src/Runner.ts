@@ -3,12 +3,12 @@ import Token from './Token/Token';
 import Lexer from './Lexer/Lexer'
 import NestedEnv from './Env/NestedEnv'
 import Environment from './Env/Environment'
-import FuncParser from './Parser/FuncParser'
+import ClosureParser from './Parser/ClosureParser'
 
 class Runner {
   static run(input: string) {
     let lexer: Lexer = new Lexer(input)
-    let bp: FuncParser = new FuncParser()
+    let bp: ClosureParser = new ClosureParser()
     let env: Environment = new NestedEnv()
 
     while (lexer.peek(0) != Token.EOF) {
