@@ -1,3 +1,3 @@
-# stone
+# stone-complier
 
-A simple programming language with TypeScript.
+A simple programming language(stone) with TypeScript.

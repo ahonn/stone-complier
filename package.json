@@ -1,7 +1,7 @@
 {
-  "name": "stone",
+  "name": "stone-complier",
   "version": "1.0.0",
-  "description": "A simple programming language with TypeScript.",
+  "description": "A simple programming language(stone) with TypeScript.",
   "main": "index.js",
   "scripts": {
     "watch": "tsc --watch",
